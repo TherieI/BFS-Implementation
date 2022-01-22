@@ -41,11 +41,6 @@ struct Cell {
     void see() {
         this->visited = true;
     }
-
-    std::string to_string() {
-        std::string res = "X: " + std::to_string(x) + " Y: " + std::to_string(y) + " Visited?: " + std::to_string(visited) + "\n";
-        return res;
-    }
 };
 
 class Grid {
@@ -144,7 +139,6 @@ public:
                     grid[x][y] = Cell(x, y, Cell::Type::WALL);
                 } else if ((x % 2 == 1 && y % 2 == 0) || (x % 2 == 0 && y % 2 == 1)) {
                     float randnum = (float) rand() / RAND_MAX;
-                    // std::cout << " comparison: " << randnum << " -> " << "\n";
                     if (randnum > 0.6) {
                         grid[x][y] = Cell(x, y, Cell::Type::WALL);
                     } else {
@@ -176,7 +170,6 @@ public:
         std::string display = "";
         for (int y = 0; y < width; y++) {
             for (int x = 0; x < height; x++) {
-                // std::cout << "(x: " << x << " y: " << y << " type: " << grid[x][y] << ")\n";
                 switch (grid[y][x].getType()) {
                     case Cell::Type::WALL:
                         display += "# ";
@@ -204,8 +197,6 @@ public:
 class Searcher {
 public:
     static Cell* breadthFirstSearch (Grid *grid, Cell *start) {
-
-        std::map<Cell*, Cell*> paths;  // map to every available path from the start node
 
         std::queue<Cell*> frontier;
         frontier.push(start);
@@ -247,14 +238,14 @@ int main() {
 
     Cell* origin = Searcher::breadthFirstSearch(&grid, grid.getStartCell());  // the end cell
 
-    while (origin == nullptr) {
+    while (origin == nullptr) {  // generate mazes until we find a valid one
         std::cout << "Generated grid - no path\n";
         grid.clear();
         grid.create();
         origin = Searcher::breadthFirstSearch(&grid, grid.getStartCell());  // map to every cell that could be accessed
     }
 
-    grid.draw();
+    grid.draw();  // draw initial empty maze
 
     std::cout << "Goal found \n";
     std::vector<Cell*> path;
@@ -267,7 +258,7 @@ int main() {
         cell->setType(Cell::Type::SEARCH);
     }
 
-    grid.draw();
+    grid.draw();  // draw solved maze
 
     std::cin.get();
 }
