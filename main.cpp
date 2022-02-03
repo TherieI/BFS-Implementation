@@ -153,7 +153,6 @@ public:
         // Entrance and Exit
         int randSpawn = (int) (( (float) rand() / RAND_MAX) * (width - 2) + 1);
         grid[0][randSpawn].setType(Cell::Type::START);
-        grid[height - 1][width - 2].setType(Cell::Type::GOAL);
     }
 
     void clear() {
