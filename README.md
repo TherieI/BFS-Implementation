@@ -138,23 +138,13 @@ void create() {
 To create the maze, we generate `Wall` cells for every cell in this position `x % 2 == 0 && y % 2 == 0`.
 Which may look something like this: 
 
->W     W     W     W
->
->W     W     W     W
->
->W     W     W     W
->
->W     W     W     W
+<img src="images\epoints.PNG" alt="epoints" style="zoom:50%;" />
 
-To generate the maze portion, all we need to do is randomly connect the walls together, for example:
+Then, to generate the maze portion, all we need to do is randomly connect the walls together, for example:
 
-> W W W     W     W
->                           W
-> W     W W W     W
-> W
-> W W W     W     W
-> W              W 
-> W     W     W W W
+<img src="images\lpoints.PNG" alt="lpoints" style="zoom:50%;" />
+
+*(Both the points and lines represent a `WALL`)*
 
 **Grid class** (Drawing the Maze)
 
